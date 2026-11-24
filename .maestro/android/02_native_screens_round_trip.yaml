@@ -1,0 +1,48 @@
+appId: com.nbs.taptap.rnhost
+name: Android RN 설정에서 네이티브 화면으로 갔다가 RN 설정으로 돌아온다
+---
+- launchApp:
+    clearState: true
+- runFlow: open_setting.yaml
+- tapOn:
+    id: "setting.tip.extensionSetting"
+- extendedWaitUntil:
+    visible: "Safari 익스텐션 허용하기"
+    timeout: 10000
+- tapOn: "chevron-left"
+- extendedWaitUntil:
+    visible:
+      id: "setting.screen"
+    timeout: 10000
+- tapOn:
+    id: "setting.tip.shareSetting"
+- extendedWaitUntil:
+    visible: "Safari에서 공유하기"
+    timeout: 10000
+- back
+- extendedWaitUntil:
+    visible:
+      id: "setting.screen"
+    timeout: 10000
+- tapOn:
+    id: "setting.tip.favoriteSetting"
+- extendedWaitUntil:
+    visible: "즐겨찾기 설정하기"
+    timeout: 10000
+- tapOn: "chevron-left"
+- extendedWaitUntil:
+    visible:
+      id: "setting.screen"
+    timeout: 10000
+- tapOn:
+    id: "setting.tip.highlightGuide"
+- extendedWaitUntil:
+    visible: "문장 하이라이트"
+    timeout: 10000
+- tapOn: "chevron-left"
+- extendedWaitUntil:
+    visible:
+      id: "setting.screen"
+    timeout: 10000
+- assertVisible:
+    id: "setting.appVersion.value"

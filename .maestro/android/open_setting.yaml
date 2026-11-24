@@ -1,0 +1,20 @@
+appId: com.nbs.taptap.rnhost
+---
+- extendedWaitUntil:
+    visible: "settings"
+    timeout: 30000
+- waitForAnimationToEnd
+- repeat:
+    while:
+      notVisible:
+        id: "setting.screen"
+    times: 3
+    commands:
+      - tapOn: "settings"
+      - extendedWaitUntil:
+          visible:
+            id: "setting.screen"
+          timeout: 60000
+          optional: true
+- assertVisible:
+    id: "setting.screen"

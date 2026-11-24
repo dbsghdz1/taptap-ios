@@ -1,0 +1,19 @@
+appId: com.Nbs.dev.app
+name: iOS 홈에서 RN 설정으로 들어갔다가 홈으로 돌아온다
+---
+- launchApp:
+    clearState: true
+    arguments:
+      onboarding: true
+- runFlow: open_setting.yaml
+- assertVisible:
+    id: "setting.appVersion.value"
+- assertVisible: "알아두면 좋은 팁"
+- assertVisible: "사용된 오픈 소스"
+- tapOn:
+    id: "setting.topBar.back"
+- extendedWaitUntil:
+    visible: "카테고리별 보기"
+    timeout: 10000
+- assertNotVisible:
+    id: "setting.screen"

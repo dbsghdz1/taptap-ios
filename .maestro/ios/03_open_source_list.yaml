@@ -1,0 +1,32 @@
+appId: com.Nbs.dev.app
+name: iOS RN 설정에서 RN 오픈소스 목록으로 갔다가 돌아온다
+---
+- launchApp:
+    clearState: true
+    arguments:
+      onboarding: true
+- runFlow: open_setting.yaml
+- tapOn:
+    id: "setting.openSource"
+- extendedWaitUntil:
+    visible:
+      id: "openSource.screen"
+    timeout: 10000
+- assertVisible: "사용된 오픈소스"
+- assertVisible: "Composable Architecture"
+- assertVisible: "Tuist"
+- assertVisible: "LinkNavigator"
+- assertVisible: "React Native"
+- tapOn:
+    id: "openSource.topBar.back"
+- extendedWaitUntil:
+    visible:
+      id: "setting.screen"
+    timeout: 10000
+- assertNotVisible:
+    id: "openSource.screen"
+- tapOn:
+    id: "setting.topBar.back"
+- extendedWaitUntil:
+    visible: "카테고리별 보기"
+    timeout: 10000

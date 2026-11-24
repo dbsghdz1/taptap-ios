@@ -1,0 +1,18 @@
+appId: com.nbs.taptap.rnhost
+name: Android 네이티브 홈에서 RN 설정으로 들어갔다가 홈으로 돌아온다
+---
+- launchApp:
+    clearState: true
+- runFlow: open_setting.yaml
+- extendedWaitUntil:
+    visible:
+      id: "setting.appVersion.value"
+    timeout: 10000
+- assertVisible: "알아두면 좋은 팁"
+- tapOn:
+    id: "setting.topBar.back"
+- extendedWaitUntil:
+    visible: "카테고리별 보기"
+    timeout: 10000
+- assertNotVisible:
+    id: "setting.screen"

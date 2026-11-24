@@ -1,0 +1,29 @@
+appId: com.Nbs.dev.app
+name: iOS 네이티브 응답이 늦으면 앱 버전 자리에 로딩을 보이고 응답 뒤 버전을 보인다
+---
+- launchApp:
+    clearState: true
+    arguments:
+      onboarding: true
+      RNFaultAppInfoDelayMs: 12000
+- repeat:
+    while:
+      notVisible: "settings"
+    times: 20
+    commands:
+      - runFlow: ../shared/dismiss_ios_system_alert.yaml
+      - waitForAnimationToEnd:
+          timeout: 1000
+- tapOn: "settings"
+- extendedWaitUntil:
+    visible:
+      id: "setting.appVersion.loading"
+    timeout: 8000
+- assertNotVisible:
+    id: "setting.appVersion.value"
+- extendedWaitUntil:
+    visible:
+      id: "setting.appVersion.value"
+    timeout: 20000
+- assertNotVisible:
+    id: "setting.appVersion.loading"

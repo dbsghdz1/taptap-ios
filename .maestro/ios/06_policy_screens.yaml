@@ -1,0 +1,31 @@
+appId: com.Nbs.dev.app
+name: iOS 개인정보 처리방침과 서비스 이용약관이 각자의 글을 보인다
+---
+- launchApp:
+    clearState: true
+    arguments:
+      onboarding: true
+- runFlow: open_setting.yaml
+- tapOn:
+    id: "setting.privacyPolicy"
+- extendedWaitUntil:
+    visible: "개인정보 처리방침"
+    timeout: 10000
+- assertVisible: '(?s).*2026년 7월 29일 마지막으로 업데이트 됨.*'
+- tapOn: "chevron-left"
+- extendedWaitUntil:
+    visible:
+      id: "setting.screen"
+    timeout: 10000
+- tapOn:
+    id: "setting.termsOfService"
+- extendedWaitUntil:
+    visible: "서비스 이용약관"
+    timeout: 10000
+- assertVisible: '(?s).*제1조\(목적\).*'
+- assertNotVisible: '(?s).*2026년 7월 29일 마지막으로 업데이트 됨.*'
+- tapOn: "chevron-left"
+- extendedWaitUntil:
+    visible:
+      id: "setting.screen"
+    timeout: 10000

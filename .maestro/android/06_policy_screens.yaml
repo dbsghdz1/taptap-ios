@@ -1,0 +1,28 @@
+appId: com.nbs.taptap.rnhost
+name: Android 개인정보 처리방침과 서비스 이용약관이 각자의 라우트로 열린다
+---
+- launchApp:
+    clearState: true
+- runFlow: open_setting.yaml
+- tapOn:
+    id: "setting.privacyPolicy"
+- extendedWaitUntil:
+    visible: "개인정보 처리방침"
+    timeout: 10000
+- assertNotVisible: "서비스 이용약관"
+- tapOn: "chevron-left"
+- extendedWaitUntil:
+    visible:
+      id: "setting.screen"
+    timeout: 10000
+- tapOn:
+    id: "setting.termsOfService"
+- extendedWaitUntil:
+    visible: "서비스 이용약관"
+    timeout: 10000
+- assertNotVisible: "개인정보 처리방침"
+- tapOn: "chevron-left"
+- extendedWaitUntil:
+    visible:
+      id: "setting.screen"
+    timeout: 10000

@@ -1,0 +1,16 @@
+appId: com.Nbs.dev.app
+---
+- repeat:
+    while:
+      notVisible: "settings"
+    times: 20
+    commands:
+      - runFlow: ../shared/dismiss_ios_system_alert.yaml
+      - waitForAnimationToEnd:
+          timeout: 1000
+- tapOn: "settings"
+- extendedWaitUntil:
+    visible:
+      id: "setting.screen"
+    timeout: 30000
+- runFlow: ../shared/dismiss_ios_system_alert.yaml

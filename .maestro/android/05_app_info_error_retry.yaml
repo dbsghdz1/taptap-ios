@@ -1,0 +1,22 @@
+appId: com.nbs.taptap.rnhost
+name: Android 네이티브가 실패하면 다시 시도를 보이고 다시 시도하면 버전을 불러온다
+---
+- launchApp:
+    clearState: true
+    arguments:
+      RNFaultAppInfoFailCount: 1
+- runFlow: open_setting.yaml
+- extendedWaitUntil:
+    visible:
+      id: "setting.appVersion.retry"
+    timeout: 10000
+- assertNotVisible:
+    id: "setting.appVersion.value"
+- tapOn:
+    id: "setting.appVersion.retry"
+- extendedWaitUntil:
+    visible:
+      id: "setting.appVersion.value"
+    timeout: 10000
+- assertNotVisible:
+    id: "setting.appVersion.retry"

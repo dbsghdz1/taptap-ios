@@ -1,0 +1,7 @@
+appId: com.Nbs.dev.app
+---
+- runFlow:
+    when:
+      visible: "지금 안 함"
+    commands:
+      - tapOn: "지금 안 함"
