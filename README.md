@@ -7,6 +7,8 @@
 
 탭탭 iOS 레포지토리입니다.
 
+> 이 브랜치는 React Native 브라운필드 전환 실험입니다. 설정 화면 두 개를 RN으로 옮겼고, develop에는 합치지 않습니다. 구조와 검증 결과는 [docs/react-native-brownfield.md](docs/react-native-brownfield.md)에 있습니다.
+
 ## 💡 Feature
 1. **Safari 확장프로그램**을 통해 기사를 읽으며 동시에 문장별 하이라이트와 메모를 남기기
 <img width="1024" alt="image" src="https://github.com/user-attachments/assets/43b96fcd-3453-4afc-8b4f-c0b8112ecf85" />
