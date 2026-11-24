@@ -13,8 +13,6 @@ public struct Constants {
     return "\(version)"
   }
   
-  public static var notionLink: String = "https://nettle-check-e5b.notion.site/taptap"
-  
   public struct AppInfo {
     public static let privacyPolicy = """
     2026년 7월 29일 마지막으로 업데이트 됨.

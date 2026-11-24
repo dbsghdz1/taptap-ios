@@ -21,7 +21,6 @@ public enum AppRoute: Equatable {
   case shareSetting
   case favoriteSetting
   case policyDetail(title: String, text: String)
-  case openSourceList
   
   // OriginalFeature
   case originalArticle(ArticleItem)
