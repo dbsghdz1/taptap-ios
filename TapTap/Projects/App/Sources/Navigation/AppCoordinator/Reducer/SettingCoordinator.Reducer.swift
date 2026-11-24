@@ -7,6 +7,8 @@
 
 import ComposableArchitecture
 
+import Shared
+
 struct SettingCoordinatorReducer: Reducer {
   typealias State = AppCoordinator.State
   typealias Action = AppCoordinator.Action
@@ -14,41 +16,14 @@ struct SettingCoordinatorReducer: Reducer {
   var body: some ReducerOf<Self> {
     Reduce { state, action in
       switch action {
-      // MARK: - 부모(최상위) 피쳐 네비게이션
-      case .path(.element(id: _, action: .setting(.delegate(.route(let route))))):
-        switch route {
-        case .back:
-          state.path.removeLast()
-          return .none
-          
-        case .extensionSetting:
-          state.path.append(.extensionSetting(.init()))
-          return .none
-          
-        case .onboardingHighlightGuide:
-          state.path.append(.onboardingHighlightGuide(.init()))
-          return .none
-          
-        case .shareSetting:
-          state.path.append(.shareSetting(.init()))
-          return .none
-          
-        case .favoriteSetting:
-          state.path.append(.favoriteSetting(.init()))
-          return .none
-          
-        case let .policyDetail(title, text):
-          state.path.append(.policyDetail(.init(title: title, text: text)))
-          return .none
-          
-        case .openSourceList:
-          state.path.append(.openSourceList(.init()))
-          return .none
-        
-        default:
-          return .none
-        }
-        
+      case .reactNative(.back):
+        if !state.path.isEmpty { state.path.removeLast() }
+        return .none
+
+      case let .reactNative(.open(route)):
+        state.path.append(Self.destination(for: route))
+        return .none
+
       // MARK: - 자식(하위) 피쳐 네비게이션
       case .path(.element(id: _, action: .extensionSetting(.delegate(.route(.back))))):
         if !state.path.isEmpty { state.path.removeLast() }
@@ -65,14 +40,29 @@ struct SettingCoordinatorReducer: Reducer {
       case .path(.element(id: _, action: .policyDetail(.delegate(.route(.back))))):
         if !state.path.isEmpty { state.path.removeLast() }
         return .none
-         
-      case .path(.element(id: _, action: .openSourceList(.delegate(.route(.back))))):
-        if !state.path.isEmpty { state.path.removeLast() }
-        return .none
         
       default:
         return .none
       }
+    }
+  }
+
+  static func destination(for route: ReactNativeRoute) -> AppCoordinator.Path.State {
+    switch route {
+    case .extensionSetting:
+      return .extensionSetting(.init())
+    case .highlightGuide:
+      return .onboardingHighlightGuide(.init())
+    case .shareSetting:
+      return .shareSetting(.init())
+    case .favoriteSetting:
+      return .favoriteSetting(.init())
+    case .privacyPolicy:
+      return .policyDetail(.init(title: "개인정보 처리방침", text: Constants.AppInfo.privacyPolicy))
+    case .termsOfService:
+      return .policyDetail(.init(title: "서비스 이용약관", text: Constants.AppInfo.termsOfService))
+    case .openSourceList:
+      return .reactNative(.init(screen: .openSourceList))
     }
   }
 }

@@ -47,13 +47,14 @@ extension AppCoordinator {
     // Search
     case search(SearchFeature)
     
+    // React Native
+    case reactNative(ReactNativeScreenFeature)
+
     // Setting
-    case setting(SettingFeature)
     case extensionSetting(ExtensionSettingFeature)
     case shareSetting(ShareSettingFeature)
     case favoriteSetting(FavoriteSettingFeature)
     case policyDetail(PolicyDetailFeature)
-    case openSourceList(OpenSourceListFeature)
   }
 }
 

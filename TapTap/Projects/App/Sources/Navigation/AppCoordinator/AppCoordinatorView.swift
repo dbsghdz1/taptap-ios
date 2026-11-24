@@ -73,9 +73,11 @@ public struct AppCoordinatorView: View {
       case let .search(store):
         SearchView(store: store)
         
+      // React Native
+      case let .reactNative(store):
+        ReactNativeScreenView(store: store)
+
       // SettingFeature
-      case let .setting(store):
-        SettingView(store: store)
       case let .extensionSetting(store):
         ExtensionSettingView(store: store)
       case let .shareSetting(store):
@@ -84,8 +86,11 @@ public struct AppCoordinatorView: View {
         FavoriteSettingView(store: store)
       case let .policyDetail(store):
         PolicyDetailView(store: store)
-      case let .openSourceList(store):
-        OpenSourceListView(store: store)
+      }
+    }
+    .onAppear {
+      ReactNativeNavigator.shared.handler = { [store] request in
+        store.send(.reactNative(request))
       }
     }
   }

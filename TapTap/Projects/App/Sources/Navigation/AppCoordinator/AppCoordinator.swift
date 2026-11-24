@@ -25,6 +25,7 @@ public struct AppCoordinator {
   public enum Action: Equatable {
     case path(StackActionOf<Path>)
     case home(HomeFeature.Action)
+    case reactNative(ReactNativeNavigationRequest)
   }
   
   public var body: some ReducerOf<Self> {
@@ -32,7 +33,7 @@ public struct AppCoordinator {
     Reduce { state, action in
       switch action {
       case .home(.delegate(.route(.setting))):
-        state.path.append(.setting(.init()))
+        state.path.append(.reactNative(.init(screen: .setting)))
         return .none
         
       case .home(.delegate(.route(.addLink(let copiedLink)))):
@@ -59,7 +60,7 @@ public struct AppCoordinator {
         state.path.append(.myCategoryCollection(.init()))
         return .none
     
-      case .home, .path:
+      case .home, .path, .reactNative:
         return .none
       }
     }
