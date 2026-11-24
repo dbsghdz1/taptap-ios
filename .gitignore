@@ -139,3 +139,16 @@ GoogleService-Info.plist
 
 # Xcode 빌드 산출물 (로컬 검증용)
 TapTap/dd/
+
+# React Native
+node_modules/
+TapTap/Pods/
+.gradle/
+local.properties
+.cxx/
+*.hprof
+.xcode.env.local
+android/app/build/
+android/build/
+!TapTap/Tuist/Config/App.debug.xcconfig
+!TapTap/Tuist/Config/App.release.xcconfig

@@ -47,6 +47,20 @@ let appTarget = Target.target(
   sources: .sources,
   resources: .default,
   entitlements: .file(path: "App.entitlements"),
+  scripts: [
+    .post(
+      script: """
+      set -e
+      export PROJECT_ROOT="$SRCROOT/../../.."
+      export ENTRY_FILE="index.js"
+      WITH_ENVIRONMENT="$REACT_NATIVE_PATH/scripts/xcode/with-environment.sh"
+      REACT_NATIVE_XCODE="$REACT_NATIVE_PATH/scripts/react-native-xcode.sh"
+      /bin/sh -c "\\"$WITH_ENVIRONMENT\\" \\"$REACT_NATIVE_XCODE\\""
+      """,
+      name: "Bundle React Native code and images",
+      basedOnDependencyAnalysis: false
+    )
+  ],
   dependencies: [
     .safariEx(),
     .actionEx(),
@@ -60,7 +74,9 @@ let appTarget = Target.target(
     .searchFeature(),
     .settingFeature(),
     .analyticsKit()
-  ]
+  ],
+  xcconfig: .relativeToRoot("Tuist/Config/App.debug.xcconfig"),
+  releaseXcconfig: .relativeToRoot("Tuist/Config/App.release.xcconfig")
 )
 
 let safariTarget = Target.target(

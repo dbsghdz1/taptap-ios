@@ -21,7 +21,8 @@ extension Target {
     scripts: [TargetScript] = [],
     dependencies: [TargetDependency] = [],
     settings: Settings? = nil,
-    xcconfig: Path? = .relativeToRoot("Tuist/Config/Project.xcconfig")
+    xcconfig: Path? = .relativeToRoot("Tuist/Config/Project.xcconfig"),
+    releaseXcconfig: Path? = nil
   ) -> Target {
     
     let signing = Target.signingSettings(for: product, name: name)
@@ -33,7 +34,7 @@ extension Target {
         case .debug:
           return .debug(name: $0.name, settings: $0.settings, xcconfig: xcconfig)
         case .release:
-          return .release(name: $0.name, settings: $0.settings, xcconfig: xcconfig)
+          return .release(name: $0.name, settings: $0.settings, xcconfig: releaseXcconfig ?? xcconfig)
         @unknown default:
           return .debug(name: $0.name, settings: $0.settings, xcconfig: xcconfig)
         }

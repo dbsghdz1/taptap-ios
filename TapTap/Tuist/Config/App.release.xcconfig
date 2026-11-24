@@ -1,0 +1,6 @@
+#include? "Project.xcconfig"
+#include? "../../Pods/Target Support Files/Pods-TapTap/Pods-TapTap.release.xcconfig"
+
+CLANG_CXX_LANGUAGE_STANDARD = c++20
+ENABLE_USER_SCRIPT_SANDBOXING = NO
+REACT_NATIVE_PATH = $(SRCROOT)/../../../node_modules/react-native
