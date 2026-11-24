@@ -40,6 +40,10 @@ struct SettingCoordinatorReducer: Reducer {
       case .path(.element(id: _, action: .policyDetail(.delegate(.route(.back))))):
         if !state.path.isEmpty { state.path.removeLast() }
         return .none
+
+      case .path(.element(id: _, action: .onboardingHighlightGuide(.delegate(.route(.back))))):
+        if !state.path.isEmpty { state.path.removeLast() }
+        return .none
         
       default:
         return .none
